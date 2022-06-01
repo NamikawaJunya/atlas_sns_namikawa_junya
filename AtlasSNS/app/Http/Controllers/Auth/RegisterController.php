@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Auth; //どこにファイルがあるかの処理
 
-use App\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
+use App\User; //このクラス使うよの記述
+use App\Http\Controllers\Controller; //このクラス使うよの記述
+use Illuminate\Support\Facades\Validator; //このクラス使うよの記述
+use Illuminate\Foundation\Auth\RegistersUsers; //このクラス使うよの記述
+use Illuminate\Http\Request; //このクラス使うよの記述
+//Illuminateは、laravelでプロジェクトを作成した時に自動生成される、vendorディレクトリ配下に存在する。vender > laravel > framework > src > Illuminate,要約すると、Laravelの大事なコンポーネントが置いてある場所ということです。
+
 
 class RegisterController extends Controller
 {
@@ -48,23 +50,27 @@ class RegisterController extends Controller
      */
 
     //バリデーションルール
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'username' => 'required|string|max:255',
-            'mail' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:4|confirmed',
-        ]);
-        if ($validator->fails()) {
-            return redirect('post/create')
-            ->withErrors($validator)
-                ->withInput();
+    // //protected function validator(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         'username' => 'required|string|max:255',
+    //         'mail' => 'required|string|email|max:255|unique:users',
+    //         'password' => 'required|string|min:4|confirmed',
+    //     ]);
+    //     $validator = Validator::make($request, $rule);
+    //     if ($validator->fails()) {
+    //         // バリデーションに引っかかった場合の処理
+    //         'username' => '入力されていません。',
+    //         'mali' => '入力されていません。',
+    //         'password' => '入力されていません。',
+    //     }:
 
-            $validator = Validator::make($request, $rule);
-            if ($validator->fails()) {
-                // バリデーションに引っかかった場合の処理
-            }
-    }
+
+    // if ($validator->fails()) {
+    //return redirect('post/create')
+    //->withErrors($validator)
+    //->withInput();
+    //}
 
     /**
      * Create a new user instance after a valid registration.
@@ -74,7 +80,7 @@ class RegisterController extends Controller
      */
 
     //クリエイト処理
-    protected function create(array $data)
+    public function create(array $data)
     {
         return User::create([
             'username' => $data['username'],
@@ -82,6 +88,14 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+    // protected function create(array $data)
+    // {
+    //     return User::create([
+    //         'username' => $data['username'],
+    //         'mail' => $data['mail'],
+    //         'password' => bcrypt($data['password']),
+    //     ]);
+    // }
 
 
     // public function registerForm(){
@@ -89,17 +103,20 @@ class RegisterController extends Controller
     // }
 
     //上2つ（バリデーションとクリエイトの処理の呼び出し）の記述
-    public function register(Request $request)
-    {
-        if ($request->isMethod('post')) {
-            $data = $request->input();
 
-            $this->create($data);
-            return redirect('added');
+    public function register(Request $request) //左のrequestはuse宣言の〇〇/requestの省略、受け取ったデータをコントローラー内では＄requestという変数で使う為「requestデータは＄requestとして使う」と宣言
+    {
+        if ($request->isMethod('post')) {//指定したHTTP動詞と一致していればtrueをそうでなければfalseを返す。指定は大文字・小文字の区別なし。
+            $data = $request->input(); //指定したキーの値を取得。デフォルト値を指定できる
+
+            $this->create($data); //$thisはクラスの中で使い、ここで呼び出すメソッドをインスタンスメソッドという。インスタンスメソッドは、クラス内であればスコープ外（関数の外）であっても、そのメソッドを呼び出すことができる。class RegisterController extends Controllerで指定したpublic function create(array $data)を呼んでいる。
+            {
+            return redirect('added'); //
         }
         return view('auth.register');
     }
 
+    //登録完了/登録者の名前の表示(新規登録後のようこそ画面)
     public function added()
     {
         return view('auth.added');

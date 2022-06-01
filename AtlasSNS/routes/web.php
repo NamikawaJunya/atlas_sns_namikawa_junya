@@ -34,10 +34,8 @@ Route::get('/top', 'PostsController@index');
 
 Route::get('/profile', 'UsersController@profile');
 
+//検索機能
 Route::get('/search', 'UsersController@index');
-
-Route::get('/follow-list', 'PostsController@index');
-Route::get('/follower-list', 'PostsController@index');
 
 //ログアウト
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -45,9 +43,9 @@ Route::get('/logout', 'Auth\LoginController@logout');
 //ヘッダー/ロゴにトップへ遷移するリンクを設置
 Route::get('images/logo.png', 'Auth\LoginController@login');
 
-//ヘッダー/アコーディオンメニューの設置
-Route::get('/profile', 'Auth\LoginController@login');
+//アコーディオンメニュー/トップ,プロフィールのリンク設置
+//Route::get('/profile', '');
 
 //サイドバー/フォロー,フォロワーリストへのリンクの設置
-Route::get('/follow-list', 'follows\followsController@followList');
-Route::get('/follower-list', 'follows\followsController@followerList');
+Route::get('/follow-list', 'followsController@followList');
+Route::get('/follower-list', 'followsController@followerList');
