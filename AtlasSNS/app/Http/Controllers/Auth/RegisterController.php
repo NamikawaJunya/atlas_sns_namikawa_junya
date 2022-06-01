@@ -104,6 +104,8 @@ class RegisterController extends Controller
 
     //上2つ（バリデーションとクリエイトの処理の呼び出し）の記述
 
+
+    //ユーザーの有無の処理
     public function register(Request $request) //左のrequestはuse宣言の〇〇/requestの省略、受け取ったデータをコントローラー内では＄requestという変数で使う為「requestデータは＄requestとして使う」と宣言
     {
         if ($request->isMethod('post')) {//指定したHTTP動詞と一致していればtrueをそうでなければfalseを返す。指定は大文字・小文字の区別なし。
@@ -111,9 +113,9 @@ class RegisterController extends Controller
 
             $this->create($data); //$thisはクラスの中で使い、ここで呼び出すメソッドをインスタンスメソッドという。インスタンスメソッドは、クラス内であればスコープ外（関数の外）であっても、そのメソッドを呼び出すことができる。class RegisterController extends Controllerで指定したpublic function create(array $data)を呼んでいる。
             {
-            return redirect('added'); //
+            return redirect('/added'); //addedはユーザーの新規登録完了後の画面のことだから成功したらweb.phpを通ってaddedに行く（post）
         }
-        return view('auth.register');
+        return view('auth.register');//失敗したらregisterの画面に戻る
     }
 
     //登録完了/登録者の名前の表示(新規登録後のようこそ画面)
