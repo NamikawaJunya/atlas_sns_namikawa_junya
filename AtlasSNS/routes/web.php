@@ -35,13 +35,13 @@ Route::get('/top', 'PostsController@index');
 Route::get('/profile', 'UsersController@profile');
 
 //検索機能
-Route::get('/search', 'UsersController@index');
+Route::get('/search', 'UsersController@search');
 
 //ログアウト
 Route::get('/logout', 'Auth\LoginController@logout');
 
 //ヘッダー/ロゴにトップへ遷移するリンクを設置
-Route::get('images/logo.png', 'Auth\LoginController@login');
+// Route::get('images/logo.png', 'Auth\LoginController@login');
 
 //アコーディオンメニュー/トップ,プロフィールのリンク設置
 //Route::get('/profile', '');
@@ -49,3 +49,7 @@ Route::get('images/logo.png', 'Auth\LoginController@login');
 //サイドバー/フォロー,フォロワーリストへのリンクの設置
 Route::get('/follow-list', 'followsController@followList');
 Route::get('/follower-list', 'followsController@followerList');
+
+//投稿フォーム（URLで投稿内容を見られないためにPostを使う、単純に送り先がポストコントローラだから）
+// Route::get('/createForm', 'PostsController@createForm');
+Route::post('/post', 'PostsController@post');
