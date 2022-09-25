@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<!-- 上のバーとサイドバーの表示のページ -->
 <head>
   <meta charset="utf-8" />
   <!--IEブラウザ対策-->
@@ -39,6 +39,7 @@
   </header>
   <div id="row">
     <div id="container">
+      <!-- 別のページの一部のコードが入る -->
       @yield('content')
     </div>
     <div id="side-bar">
@@ -60,8 +61,8 @@
   </div>
   <footer>
   </footer>
-  <script src="JavaScriptファイルのURL"></script>
-  <script src="JavaScriptファイルのURL"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

@@ -1,10 +1,11 @@
 @charset "UTF-8";
 
-html{
+/* ログアウト状態に使う */
+html {
     height: 100%;
 }
 
-body{
+body {
     height: 100%;
     background: #186AC9;
 }

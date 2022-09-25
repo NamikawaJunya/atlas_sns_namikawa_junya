@@ -52,4 +52,10 @@ Route::get('/follower-list', 'followsController@followerList');
 
 //投稿フォーム（URLで投稿内容を見られないためにPostを使う、単純に送り先がポストコントローラだから）
 // Route::get('/createForm', 'PostsController@createForm');
+// 新規投稿用の記述
 Route::post('/post', 'PostsController@post');
+// 投稿編集のURL
+Route::post('/post/update', 'PostsController@update');
+// 投稿削除のURL
+Route::get('/post/delete', 'PostsController@delete');
+// Route::post('/post/delete', 'PostsController@delete');
