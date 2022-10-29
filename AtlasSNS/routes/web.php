@@ -30,12 +30,30 @@ Route::get('/added', 'Auth\RegisterController@added');
 Route::post('/added', 'Auth\RegisterController@added');
 
 //ログイン中のページ
-Route::get('/top', 'PostsController@index');
 
+//ツイートの表示
+Route::get('/top', 'PostsController@index');
+//投稿フォーム（URLで投稿内容を見られないためにPostを使う、単純に送り先がポストコントローラだから）
+// Route::get('/createForm', 'PostsController@createForm');
+// 新規投稿用の記述
+Route::post('/post', 'PostsController@post');
+// 投稿編集のURL
+Route::post('/post/update', 'PostsController@update');
+// 投稿削除のURL
+Route::get('/post/{id}/delete', 'PostsController@delete');
+
+//プロフィールURL
 Route::get('/profile', 'UsersController@profile');
 
-//検索機能
+// ユーザー一覧のURL
 Route::get('/search', 'UsersController@search');
+//ユーザー検索のURL
+Route::post('/usersearch', 'UsersController@usersearch');
+//ユーザーページのフォロー
+Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
+//ユーザーページのフォロー解除
+Route::delete('users/{user}unfollow', 'UsersController@unfollow')->name('unfollow');
+
 
 //ログアウト
 Route::get('/logout', 'Auth\LoginController@logout');
@@ -49,13 +67,3 @@ Route::get('/logout', 'Auth\LoginController@logout');
 //サイドバー/フォロー,フォロワーリストへのリンクの設置
 Route::get('/follow-list', 'followsController@followList');
 Route::get('/follower-list', 'followsController@followerList');
-
-//投稿フォーム（URLで投稿内容を見られないためにPostを使う、単純に送り先がポストコントローラだから）
-// Route::get('/createForm', 'PostsController@createForm');
-// 新規投稿用の記述
-Route::post('/post', 'PostsController@post');
-// 投稿編集のURL
-Route::post('/post/update', 'PostsController@update');
-// 投稿削除のURL
-Route::get('/post/delete', 'PostsController@delete');
-// Route::post('/post/delete', 'PostsController@delete');

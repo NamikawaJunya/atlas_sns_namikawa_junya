@@ -26,4 +26,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+//フォロー
+public function follow(Int $user_id)
+{
+    return $this->follows()->attach($user_id); //attachの意味は〜をつけるという意味。
+}
+//フォロー解除
+public function unfollow(Int $user_id)
+{
+    return $this->follows()->detach($user_id); //detachの意味は〜を切り離すという意味
+}
+//フォローしているか
+public function isfollowing($user_id)
+{
+    return(boolean) $this->follows()->where('followed_id',$user_id)->first(['id']); //booleanはプール値
+}
 }

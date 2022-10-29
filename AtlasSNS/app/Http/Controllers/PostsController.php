@@ -44,10 +44,10 @@ class PostsController extends Controller
         return redirect('/top');
     }
 // 投稿内容削除の記述
-    public function delete(Request $request)
+    public function delete($id)
     {
-    $id = $request->input('id');
         \DB::table('posts')
+        // データベースのpostsテーブルのidと$idが一致するものをdeleteする
             ->where('id', $id)
             ->delete();
 
